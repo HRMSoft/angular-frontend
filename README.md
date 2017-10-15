@@ -1,6 +1,18 @@
-# RestaurantAdvisorWebapp
+# RestaurantAdvisor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.7.
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.7.
+- This project uses [@angular/material components library](https://github.com/angular/material2)
+- This project uses [@angular/flex-layout](https://github.com/angular/flex-layout)
+
+## Installation
+
+1. Install [Node Version Manager (nvm)](https://github.com/creationix/nvm)
+2. Clone this Repository
+3. `cd angular-frontend/`
+4. `nvm use` (This will load the proper node and npm version with nvm)
+5. `npm install -g @angular/cli@1.4.7` (This will install angular cli)
+5. `npm install` (This will install all packages needed for the app)
+6. You are ready to go. Start the dev server as described in the chapter "Development Server"
 
 ## Development server
 
