@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,7 @@ export class AuthService {
     let body = {};
 
     return new Observable((observer) => {
-      this.http.post("restaurants/register", body)
+      this.http.post(environment.apiUrl + "restaurants/register", body)
         .map((response: Response) => response.json())
         .subscribe(
           data => {
