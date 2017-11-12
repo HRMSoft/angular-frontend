@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log("i was here");
     if (this.myForm.valid) {
       this.authService.login(this.myForm.get("name").value, this.myForm.get("password").value).subscribe(
         (message) => {
@@ -35,11 +34,9 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          console.log("error", error);
+          console.log("error on login", error);
         }
       );
-
-      console.log("submit", this.myForm);
     }
   }
 

@@ -15,11 +15,10 @@ export class RestaurantsComponent implements OnInit {
   ngOnInit() {
     this.restaurantsService.getRestaurantProfile().subscribe(
       (data) => {
-        console.log("data", data);
         this.data = data;
       },
       (error) => {
-        console.log("error on fetching", error);
+        console.log("error on fetching data", error);
       }
     )
   }
