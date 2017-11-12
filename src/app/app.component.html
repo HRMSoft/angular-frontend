@@ -5,7 +5,6 @@
   <span class="fill-remaining-space"></span>
 
   <button *ngIf="isAuthenticated()" mat-button (click)="logout()">Logout</button>
-  <button *ngIf="!isAuthenticated() && !isOnLoginPage()" mat-button (click)="login()">Login</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
 

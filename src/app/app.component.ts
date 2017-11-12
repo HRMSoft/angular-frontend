@@ -21,12 +21,4 @@ export class AppComponent {
   public isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
-
-  public login() {
-    this.router.navigate(["login"]);
-  }
-
-  public isOnLoginPage(): boolean {
-    return this.router.url === '/login';
-  }
 }

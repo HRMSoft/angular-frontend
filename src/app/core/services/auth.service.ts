@@ -17,13 +17,13 @@ export class AuthService {
   public register(name: string, password: string, location: string, food: string): Observable<any> {
     const body = {name, password, location, food};
 
-    console.log("body", body);
-
     return new Observable((observer) => {
       this.http.post(environment.apiUrl + "restaurants/register", body)
         .map((response: Response) => response.json())
         .subscribe(
           data => {
+            localStorage.setItem(AuthService.jwtKey, data.token.substring(3));
+            localStorage.setItem(AuthService.restaurantKey, JSON.stringify(data.restaurant));
             observer.next(data);
           }, error => {
             observer.error(error);

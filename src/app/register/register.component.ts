@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
                                 this.myForm.get("food").value).subscribe(
         (message) => {
           if (message.success) {
-            this.router.navigate(["login"]);
+            this.router.navigate(["restaurants"]);
           } else {
             console.log("error on register", message);
           }
@@ -43,6 +43,10 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
+  }
+
+  public login() {
+    this.router.navigate(["login"]);
   }
 
 }
