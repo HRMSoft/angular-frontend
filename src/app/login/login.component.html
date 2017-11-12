@@ -1,0 +1,37 @@
+<div class="container" fxLayoutAlign="center center" fxLayoutAlign.xs="start start">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <i class="material-icons avatar-icon">account_circle</i>
+      </div>
+      <mat-card-title>
+        Restaurant Login
+      </mat-card-title>
+      <mat-card-subtitle>
+        Welcome to Restaurant Advisor!
+      </mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <mat-card-content fxLayout="column">
+
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" type="text">
+          <mat-error *ngIf="myForm.get('name').hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password" type="password">
+          <mat-error *ngIf="myForm.get('password').hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="login-actions">
+        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button mat-raised-button color="primary" (click)="register()" type="button">Register</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
