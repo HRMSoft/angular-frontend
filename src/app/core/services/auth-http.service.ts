@@ -6,8 +6,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class AuthHttpService {
 
-  constructor(private http: Http,
-              private authService: AuthService) {
+  constructor(private http: Http) {
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
@@ -72,11 +71,9 @@ export class AuthHttpService {
       options.headers = new Headers();
     }
 
-    // TODO fetch from auth service
-    // const accessToken = this.authService.getAccessToken();
-    const accessToken = null;
+    const accessToken = localStorage.getItem(AuthService.jwtKey);
     const headers = options.headers;
-    headers.set("Authorization", "Bearer " + accessToken);
+    headers.set("Authorization", "JWT " + accessToken);
 
     return options;
   }

@@ -15,14 +15,14 @@
       <mat-card-content fxLayout="column">
 
         <mat-form-field>
-          <input matInput placeholder="Name" formControlName="name">
+          <input matInput placeholder="Name" formControlName="name" type="text">
           <mat-error *ngIf="myForm.get('name').hasError('required')">
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Password" formControlName="password">
+          <input matInput placeholder="Password" formControlName="password" type="password">
           <mat-error *ngIf="myForm.get('password').hasError('required')">
             Password is <strong>required</strong>
           </mat-error>

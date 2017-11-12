@@ -12,6 +12,8 @@ import { RouterModule } from "@angular/router";
 import { appRoutes } from "./app.routes";
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
+import { JwtHelper } from "angular2-jwt";
 
 @NgModule({
   declarations: [
@@ -34,8 +36,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    HttpModule,
   ],
-  providers: [],
+  providers: [JwtHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule {

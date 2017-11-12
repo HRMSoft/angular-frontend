@@ -3,15 +3,19 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { environment } from "../../../environments/environment";
+import { JwtHelper } from "angular2-jwt";
 
 @Injectable()
 export class AuthService {
+  public static readonly jwtKey: string = "ra-jwt";
+  public static readonly restaurantKey: string = "ra-restaurant";
 
-  constructor(private http: Http) {
+  constructor(private http: Http,
+              private jwtHelper: JwtHelper) {
   }
 
-  public register(username: string, password: string): Observable<any> {
-    let body = {};
+  public register(name: string, password: string, location: string, food, string): Observable<any> {
+    const body = {name, password, location, food};
 
     return new Observable((observer) => {
       this.http.post(environment.apiUrl + "restaurants/register", body)
@@ -27,69 +31,42 @@ export class AuthService {
     })
   }
 
-  //
-  // public logout(): Promise<any> {
-  //   return new Promise((resolve, reject) => {
-  //     const refreshToken: string = this.getRefreshToken();
-  //
-  //     const body = {
-  //       client_id: "bkw_api_client_peko_key",
-  //       grant_type: "delete_token",
-  //       client_secret: "bkw_api_client_peko_secret",
-  //       scope: "bkw_api_peko",
-  //       refresh_token: refreshToken
-  //     };
-  //
-  //     return this.http.post(this.configService.getConfig().logoutUrl, body)
-  //     // Do anyway a logout and remove token and user from local storage
-  //       .subscribe((data: any) => {
-  //         localStorage.removeItem(AuthService.tokenKey);
-  //         localStorage.removeItem(AuthService.userKey);
-  //         resolve();
-  //       }, error => {
-  //         localStorage.removeItem(AuthService.tokenKey);
-  //         localStorage.removeItem(AuthService.userKey);
-  //         resolve();
-  //       })
-  //   });
-  // }
-  //
-  // public getUserFromLocalStorage() {
-  //   return JSON.parse(localStorage.getItem(AuthService.userKey));
-  // }
-  //
-  // public isAuthenticated(): boolean {
-  //   const jwt: string = localStorage.getItem(AuthService.tokenKey);
-  //   const refreshToken = jwt ? this.jwtHelper.decodeToken(jwt).refresh_token : null;
-  //
-  //   return (jwt && refreshToken && this.accessTokenValid(jwt))
-  // }
-  //
-  // public getAccessToken(): string {
-  //   let jwt: string = localStorage.getItem(AuthService.tokenKey);
-  //   return this.jwtHelper.decodeToken(jwt).access_token;
-  // }
-  //
-  // private getRefreshToken(): string {
-  //   let jwt: string = localStorage.getItem(AuthService.tokenKey);
-  //   return this.jwtHelper.decodeToken(jwt).refresh_token;
-  // }
-  //
-  // private setUserToLocalStorage(username: string, department: string) {
-  //   localStorage.setItem(AuthService.userKey, JSON.stringify({username, department}));
-  // }
-  //
-  // private accessTokenValid(jwt: string): boolean {
-  //   if (jwt) {
-  //     let decodedToken: any = this.jwtHelper.decodeToken(jwt);
-  //     // UNIX Time (milliseconds)
-  //     let expirationDate: number = parseInt(decodedToken.expiration) * 1000;
-  //     // UNIX Time (milliseconds)
-  //     let currentDate: number = new Date().getTime();
-  //
-  //     return (currentDate < expirationDate);
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  public login(name: string, password: string): Observable<any> {
+    const body = {name, password};
+
+    return new Observable((observer) => {
+      this.http.post(environment.apiUrl + "restaurants/authenticate", body)
+        .map((response: Response) => response.json())
+        .subscribe(
+          data => {
+            localStorage.setItem(AuthService.jwtKey, data.token.substring(3));
+            localStorage.setItem(AuthService.restaurantKey, JSON.stringify(data.restaurant));
+            observer.next(data);
+          }, error => {
+            observer.error(error);
+          }, () => {
+            observer.complete();
+          });
+    });
+  }
+
+  public getRestaurantFromLocalStorage() {
+    return JSON.parse(localStorage.getItem(AuthService.restaurantKey));
+  }
+
+  public isAuthenticated(): boolean {
+    const jwt: string = localStorage.getItem(AuthService.jwtKey);
+
+    if (jwt) {
+      const decodedToken: any = this.jwtHelper.decodeToken(jwt);
+      // UNIX Time (milliseconds)
+      const expirationDate: number = parseInt(decodedToken.exp) * 1000;
+      // UNIX Time (milliseconds)
+      const currentDate: number = new Date().getTime();
+
+      return (currentDate < expirationDate);
+    } else {
+      return false;
+    }
+  }
 }
