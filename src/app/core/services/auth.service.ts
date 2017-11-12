@@ -14,8 +14,10 @@ export class AuthService {
               private jwtHelper: JwtHelper) {
   }
 
-  public register(name: string, password: string, location: string, food, string): Observable<any> {
+  public register(name: string, password: string, location: string, food: string): Observable<any> {
     const body = {name, password, location, food};
+
+    console.log("body", body);
 
     return new Observable((observer) => {
       this.http.post(environment.apiUrl + "restaurants/register", body)
@@ -68,5 +70,10 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  public logout(){
+    localStorage.removeItem(AuthService.jwtKey);
+    localStorage.removeItem(AuthService.restaurantKey);
   }
 }

@@ -2,7 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } from "@angular/material";
+import {
+  MatAutocompleteModule,
+  MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbar,
+  MatToolbarModule
+} from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { CoreModule } from "./core/core.module";
@@ -14,12 +18,14 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { JwtHelper } from "angular2-jwt";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RestaurantsComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,8 @@ import { JwtHelper } from "angular2-jwt";
     MatFormFieldModule,
     MatInputModule,
     HttpModule,
+    MatToolbarModule,
+    MatAutocompleteModule,
   ],
   providers: [JwtHelper],
   bootstrap: [AppComponent]

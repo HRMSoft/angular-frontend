@@ -1,2 +1,11 @@
+<mat-toolbar color="primary">
+  <span>RestaurantAdvisor</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+
+  <button *ngIf="isAuthenticated()" mat-button (click)="logout()">Logout</button>
+  <button *ngIf="!isAuthenticated() && !isOnLoginPage()" mat-button (click)="login()">Login</button>
+</mat-toolbar>
 <router-outlet></router-outlet>
 

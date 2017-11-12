@@ -1,0 +1,22 @@
+@import "../../styles";
+
+.login-card {
+  width: 400px;
+
+  @media(max-width: $layout-breakpoint-mobile-max) {
+    width: 100%;
+  }
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.avatar-icon {
+  font-size: 40px;
+}
+
+.login-actions {
+  margin-left: 0;
+}

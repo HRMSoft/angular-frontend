@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  public onSubmit() {
     console.log("i was here");
     if (this.myForm.valid) {
       this.authService.login(this.myForm.get("name").value, this.myForm.get("password").value).subscribe(
@@ -41,5 +41,9 @@ export class LoginComponent implements OnInit {
 
       console.log("submit", this.myForm);
     }
+  }
+
+  public register() {
+    this.router.navigate(["register"]);
   }
 }
