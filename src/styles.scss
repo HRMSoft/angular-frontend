@@ -1,6 +1,27 @@
 /* Angular Material Theme */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.margin-right{
-  margin-right:16px !important;
+
+// Breakpoints from https://github.com/angular/flex-layout/wiki/Responsive-API
+$layout-breakpoint-xs: 600px !default;
+$layout-breakpoint-xs-1: ($layout-breakpoint-xs - 1px) !default;
+$layout-breakpoint-sm: 960px !default;
+$layout-breakpoint-sm-1: ($layout-breakpoint-sm - 1px) !default;
+$layout-breakpoint-md: 1280px !default;
+$layout-breakpoint-md-1: ($layout-breakpoint-md - 1px) !default;
+$layout-breakpoint-lg: 1920px !default;
+$layout-breakpoint-lg-1: ($layout-breakpoint-lg - 1px) !default;
+
+$layout-breakpoint-mobile-max: $layout-breakpoint-xs-1;
+$layout-breakpoint-tablet-min: $layout-breakpoint-xs;
+$layout-breakpoint-tablet-max: $layout-breakpoint-md-1;
+$layout-breakpoint-desktop-min: $layout-breakpoint-md;
+
+
+body, html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
 }

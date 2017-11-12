@@ -7,7 +7,7 @@ export const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {
     path: '',
-    redirectTo: '/restaurants',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {path: '**', component: RestaurantsComponent}
