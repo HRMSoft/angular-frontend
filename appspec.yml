@@ -1,10 +1,10 @@
 version: 0.0
 os: linux
 files:
-   - source: /
-     destination: /var/www/html/src
+   - source: ./
+     destination: /src
 permissions:
-   - object: /var/www/html/src
+   - object: /src
      pattern: "**"
      owner: apache
      group: apache
